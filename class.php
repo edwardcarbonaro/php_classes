@@ -1,3 +1,11 @@
+<html>
+<form method="post">
+    <input type="submit" name="display" id="display" value="displayUser" /><br/>
+    <input type="submit" name="insert" id="insert" value="insertUser" /><br/>
+    <input type="submit" name="update" id="update" value="updateUser" /><br/>
+    <input type="submit" name="delete" id="delete" value="deleteUser" /><br/>
+</form>
+
 <?php
 
 $servername = "sql.njit.edu";
@@ -53,7 +61,7 @@ class User{
 		$fname = 'Bongo';
 		$sql ="delete from accounts where fname = '$fname' ";
 		$results = $this->runQuery($sql);
-		//header("Location: test.php");
+		echo "Deleted User!";
 		
 	}
 
@@ -62,6 +70,7 @@ class User{
 		$sql = "insert into accounts (email, fname, lname,phone, birthday,
 		gender,password) values ('yz746@njit.edu','Bongo', 'Zhao','911','$date','Male','1234');";
 		$results = $this->runQuery($sql);
+		echo "Inserted User!";
 		
 		
 	}
@@ -71,7 +80,7 @@ class User{
 		$fname = 'Bongo';
 		$sql ="update accounts set password = '4321' where fname = '$fname' ";
 		$results = $this->runQuery($sql);
-		return $results;
+		echo "Updated User!";
 		// header("Location: test.php");
 		
 	}
@@ -82,21 +91,18 @@ class User{
 
 $user1 = new User($servername,$username,$password);
 
-$user1->displayUser();
-$user1->deleteUser();
-
-// $user1->deleteUser();
-// $user1->insertUser();
-// $user1->updateUser();
-// echo "<br>";
-// echo "<h2>This is insertUser function</h2>";
-// $user1->insertUser();
-// $user1->displayUser();
-// echo "<h2>This is displayUser function</h2>";
-//echo $user1->displayUser();
-
-// $user1->deleteUser();
-// echo "<h2>This is deleteUser function</h2>";
+if(array_key_exists('display',$_POST)){
+   $user1->displayUser();
+}
+if(array_key_exists('insert',$_POST)){
+   $user1->insertUser();
+}
+if(array_key_exists('delete',$_POST)){
+   $user1->deleteUser();
+}
+if(array_key_exists('update',$_POST)){
+   $user1->updateUser();
+}
 
 
 ?>
